@@ -3,7 +3,7 @@ clc
 
 days=20;
 time_step=10;
-T=time_step*days
+T=time_step*days;
 C=200;
 cat_person=10; % 10 kinds of different people
 N=1000;
