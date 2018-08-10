@@ -3,7 +3,7 @@ clc
 
 days=20;
 time_step=10;
-T=time_step*days;
+T=time_step*days; % # of time slots
 C=200; % # of categories
 cat_person=10; % 10 kinds of different people
 N=1000; % # of people
@@ -27,7 +27,7 @@ nnz_matrix=0; %groundTruth
 nnz_train=0;
 
 % define Omega:
-Omega=[];
+Omega=[]; % Possible location category set
 
 i_matrix=repmat(1:N,[T,1]);
 i_matrix=reshape(i_matrix,[N*T,1]);
