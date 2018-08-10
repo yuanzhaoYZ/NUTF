@@ -56,9 +56,12 @@ matrix=sparse(i_matrix,j_matrix,ones(N*T,1),N,M);
 train=sparse(i_train,j_train,ones(N*T*p,1)*1.0/p,N,M);
 fprintf('Finish generating data!\n');
 
-r=10;%min(m,n);
+%rank
+r=10;%min(m,n); 
 %r=15;
+%iteration
 iter=10;
+
 X=train;
 %X=sparse(X);
 u=zeros(N,1); v=zeros(M,1);
