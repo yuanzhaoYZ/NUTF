@@ -66,9 +66,13 @@ u=zeros(N,1); v=zeros(M,1);
 %Y=U*S*V';
 val=dot(U(i_train,:)*S,V(j_train,:),2);
 
+
+% == A Parameter-free and Scalable Optimization Algorithm== (Algorithm 2 in the paper)
+% Update X
 for it=1:iter
 	
-	% project to simplex:
+	% subproblem-2 in (4) in the paper: project to simplex:
+    % The second subproblem only involves the entries lying within the possible set ? and is essentially a least square problem under a probability simplex constraint. Specifically, for each location update with user i and time slot j, we project a |?ij|-dimensional vector Xij?ij onto the probability simplex
 	tic
 	for j=1:N
 		for k=1:T
@@ -76,8 +80,11 @@ for it=1:iter
 			tmp=val(ind);%Y(j,ind);
 			val(ind)=projsmplx(tmp);
 		end
-	end
-	% project to zeros:
+    end
+    
+    
+	% subproblem-1 in (4) in the paper: project to zeros:
+    % For the first subproblem that only involves the entries outside of the possible set ?, we simply set all of them as zeros to meet the NU constraints
 	%X=Y.*train;
 	Y=sparse(i_train,j_train,val,N,M);
 
@@ -99,6 +106,7 @@ for it=1:iter
 	
 end
 
+% Update Y
 pred=Y;
 IP=sum(sum(pred.*matrix))/sqrt(sum(sum(pred))*sum(sum(matrix)));
 fprintf('Inner product with ground truth:%.3f\n', nonzeros(IP));
