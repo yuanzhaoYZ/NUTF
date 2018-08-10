@@ -4,9 +4,9 @@ clc
 days=20;
 time_step=10;
 T=time_step*days;
-C=200;
+C=200; % # of categories
 cat_person=10; % 10 kinds of different people
-N=1000;
+N=1000; % # of people
 %sparsity=10; % 10 percent of check in data
 % # of rows: m=100, cat_person(5)*people_per_cat(20)
 if (mod(N,cat_person)~=0)

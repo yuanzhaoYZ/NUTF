@@ -1,6 +1,6 @@
-function [U S V] = randomsvd(A,uu,vv, m,n,k, INIT, maxit)
+% https://github.uconn.edu/jil14036/CoPhIn/blob/master/Code_demo/methods/dirty_IMC/randomsvd.m
+function [U,S,V] = randomsvd(A,uu,vv,m,n,k, INIT, maxit)
 
-istrans = 0;
 if numel(INIT) == 0
 	Omega = randn(n, k);
 else
@@ -21,7 +21,7 @@ for i=1:maxit
 	[Q, ~] = comp_qr(Y);
 %	[Q,~] = qr(Y,0);
 end
-[Q r] = qr(Y,0);
+[Q,r] = qr(Y,0);
 B = Q'*A+(Q'*uu)*vv';
-[u S V] = svd(B,'econ');
+[u,S,V] = svd(B,'econ');
 U = Q*u;
