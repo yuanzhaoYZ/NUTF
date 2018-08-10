@@ -2,7 +2,7 @@ clear
 clc
 
 days=20;
-time_step=10;
+time_step=10; % 10 bins per day: The time period from 1am to 7am is mapped to the first bin, 7am-9am is mapped to the second bin, 9am-11am is mapped to the third bin, etc., giving a total of 10 bins per day.
 T=time_step*days; % # of time slots
 C=200; % # of categories
 cat_person=10; % 10 kinds of different people
@@ -27,12 +27,14 @@ nnz_matrix=0; %groundTruth
 nnz_train=0;
 
 % define Omega:
-Omega=[]; % Possible location category set
+Omega=[]; % Omega_(i,j): Possible location category set containing location categories in the location uncertainty circle of user i at time slot j
 
+% user matrix i
 i_matrix=repmat(1:N,[T,1]);
 i_matrix=reshape(i_matrix,[N*T,1]);
 
 fprintf('generating data!\n');
+% time slots matrix j
 j_matrix=repmat(arr,[1,days]);
 j_matrix=j_matrix+repmat((0:(T-1))*C,[cat_person,1]);
 j_matrix=repmat(j_matrix',[1,people_per_cat]);
